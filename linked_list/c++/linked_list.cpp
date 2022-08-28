@@ -4,7 +4,7 @@ using namespace std;
 
 // TODO: try to create a templete of linked list and able to get data from user of a node
 // node implementation using class
-// it represent  a node in list
+// it represent  a node in list for creation
 
 class node
 {
