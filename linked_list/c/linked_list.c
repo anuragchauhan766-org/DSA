@@ -5,7 +5,7 @@
 struct node
 {
     int data;
-    struct node *next;
+    struct node *next; // self referencing node
 };
 
 // traversal fuction
