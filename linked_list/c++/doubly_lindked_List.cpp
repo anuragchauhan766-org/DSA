@@ -1,33 +1,34 @@
 #include <bits/stdc++.h>
 #include <iostream>
 using namespace std;
-
-// TODO: try to create a templete of linked list and able to get data from user of a node
-// node implementation using class
-// it represent  a node in list for creation
-
+// node class
 class node
 {
 public:
     int data;
+    node *previous;
     node *next;
     node()
     {
         data = 0;
+        previous = NULL;
         next = NULL;
     }
     node(int data)
     {
         this->data = data;
-        this->next = NULL;
+        previous = NULL;
+        next = NULL;
     }
 };
-class linked_list
+
+// doubly linked list class
+class doubly_list
 {
 
 public:
     node *head;
-    linked_list()
+    doubly_list()
     {
         head = NULL;
     }
@@ -35,36 +36,33 @@ public:
     void printlist();
     void delete_node(int);
     void insertnode(int, int);
-    int search(int);
-    void reverse();
 };
 
-void linked_list::insertnode(int data)
+// inserting at the end of list
+
+void doubly_list::insertnode(int data)
 {
-
-    // creating a new node a allocating memory to it
-    node *newnode = new node(data);
-
-    // checking if head is empty or linked list is empty
+    node *new_node = new node(data);
     if (head == NULL)
     {
-        head = newnode;
+        head = new_node;
         return;
     }
-
-    // if list is not empty then creating and tansvering to the end of list
-
-    // creating a temp pointer to get to end of list
     node *temp = head;
     while (temp->next != NULL)
     {
         temp = temp->next;
     }
-    temp->next = newnode;
+    temp->next = new_node;
+
+    new_node->previous = temp;
 }
 
-void linked_list::insertnode(int data, int node_no)
+// inserting at a positon in a list
+
+void doubly_list::insertnode(int data, int node_no)
 {
+    node *new_node = new node(data);
     node *temp1 = head;
 
     if (node_no <= 0)
@@ -90,33 +88,36 @@ void linked_list::insertnode(int data, int node_no)
     }
     if (node_no == 1)
     {
-        node *newnode = new node(data);
-        newnode->next = head;
-        head = newnode;
+        if (head == NULL)
+        {
+            head = new_node;
+            return;
+        }
+        new_node->next = head;
+        head->previous = new_node;
+        head = new_node;
         return;
     }
-
     if (list_length == node_no - 1)
     {
         insertnode(data);
         return;
     }
-
-    // finding node after which new node will be inserted
-
-    for (int i = 1; i < node_no - 1; i++)
+    temp1 = head;
+    while (node_no-- > 1)
     {
         temp1 = temp1->next;
     }
-    node *new_node = new node(data);
-    new_node->next = temp1->next;
-    temp1->next = new_node;
+    new_node->previous = temp1->previous;
+    temp1->previous = new_node;
+    new_node->previous->next = new_node;
+    new_node->next = temp1;
 }
 
-void linked_list::delete_node(int node_no)
+// deletion
+void doubly_list::delete_node(int node_no)
 {
-    // decalring two pointer to the node
-    node *temp1 = head, *temp2 = NULL;
+    node *temp1 = head;
 
     // checking if node exist
     if (head == NULL)
@@ -147,28 +148,31 @@ void linked_list::delete_node(int node_no)
         return;
     }
 
-    // checking if node to be deleted is head
+    // if node to be delelted is head
     temp1 = head;
     if (node_no == 1)
     {
         head = head->next;
+        head->previous = NULL;
         delete temp1;
         return;
     }
-
-    // finding the node to be deleted
     while (node_no-- > 1)
     {
-        temp2 = temp1;
         temp1 = temp1->next;
     }
-    temp2->next = temp1->next;
+    temp1->previous->next = temp1->next;
+
+    if (temp1->next != NULL)
+    {
+        temp1->next->previous = temp1->previous;
+    }
+
     delete temp1;
 }
+// printing list
 
-// function to print list
-
-void linked_list::printlist()
+void doubly_list::printlist()
 {
     node *temp = head;
     while (temp != NULL)
@@ -177,53 +181,18 @@ void linked_list::printlist()
         temp = temp->next;
     }
 }
-
-int linked_list::search(int data)
-{
-    node *temp = head;
-    while (temp != NULL)
-    {
-        if (temp->data == data)
-        {
-            return 1;
-        }
-        temp = temp->next;
-    }
-    return 0;
-}
-
-// reverese program
-
-void linked_list::reverse()
-{
-    node *current = head, *next, *previous = NULL;
-    while (current != NULL)
-    {
-        next = current->next;
-        current->next = previous;
-        previous = current;
-        current = next;
-    }
-    head = previous;
-}
-// main fuction
 int main()
 {
-
-    linked_list node1;
+    doubly_list node1;
     node1.insertnode(1);
     node1.insertnode(2);
     node1.insertnode(3);
     node1.insertnode(4);
+    node1.insertnode(5);
     node1.printlist();
-    cout << "\n";
-    // node1.insertnode(23, 1);
-    // node1.delete_node(4);
-    node1.reverse();
+    cout << endl;
+    node1.delete_node(5);
+    // node1.insertnode(6, 6);
     node1.printlist();
-    cout << "\n";
-
-    // node1.search(8) ? cout << "yes \n" : cout << "NO \n";
-
     return 0;
 }
