@@ -87,6 +87,7 @@ int queue::rear()
 }
 int queue::size()
 {
+
     return s;
 }
 
@@ -105,13 +106,23 @@ void queue::printqueue()
     }
     else
     {
-        for (int i = f; i < n; i++)
-            printf("%d ", arr[i]);
+        int i;
+        for (i = f; i != r; i = (i + 1) % s)
+        {
+            cout << arr[i] << " ";
+        }
+        cout << arr[i];
 
-        for (int i = 0; i <= r; i++)
-            printf("%d ", arr[i]);
+        // or
+
+        // for (int i = f; i < n; i++)
+        //     printf("%d ", arr[i]);
+
+        // for (int i = 0; i <= r; i++)
+        //     printf("%d ", arr[i]);
     }
 }
+
 int main()
 {
     queue q1;
@@ -124,15 +135,16 @@ int main()
     q1.dequeue();
     q1.dequeue();
     q1.dequeue();
-    q1.dequeue();
     q1.enqueue(6);
-
+    q1.enqueue(7);
+    q1.enqueue(8);
+    q1.enqueue(9);
     q1.printqueue();
     cout << endl;
     cout << q1.size() << endl;
 
-    cout << q1.full() << endl;
-    cout << q1.empty() << endl;
+    // cout << q1.full() << endl;
+    // cout << q1.empty() << endl;
 
     return 0;
 }

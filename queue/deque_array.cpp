@@ -49,6 +49,7 @@ void Dequeue::insertFront(int data)
     {
         f = (f + max - 1) % max;
     }
+    s++;
     arr[f] = data;
 }
 void Dequeue::insertRear(int data)
@@ -67,6 +68,7 @@ void Dequeue::insertRear(int data)
     {
         r = (r + 1) % max;
     }
+    s++;
     arr[r] = data;
 }
 void Dequeue::DeleteFront()
@@ -85,6 +87,7 @@ void Dequeue::DeleteFront()
     {
         f = (f + 1) % max;
     }
+    s--;
 }
 void Dequeue::DeleteRear()
 {
@@ -102,6 +105,7 @@ void Dequeue::DeleteRear()
     {
         r = (r + max - 1) % max;
     }
+    s--;
 }
 void Dequeue::display()
 {
@@ -159,7 +163,8 @@ int main()
     q.insertFront(7);
     q.insertFront(8);
     q.insertFront(9);
-    q.insertFront(10);
+    cout << q.s;
+    // q.insertFront(10);
     q.display();
 
     return 0;
