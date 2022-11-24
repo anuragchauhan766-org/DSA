@@ -99,28 +99,12 @@ void queue::printqueue()
         return;
     }
 
-    if (r >= f)
+    int i;
+    for (i = f; i != r; i = (i + 1) % s)
     {
-        for (int i = f; i <= r; i++)
-            printf("%d ", arr[i]);
+        cout << arr[i] << " ";
     }
-    else
-    {
-        int i;
-        for (i = f; i != r; i = (i + 1) % s)
-        {
-            cout << arr[i] << " ";
-        }
-        cout << arr[i];
-
-        // or
-
-        // for (int i = f; i < n; i++)
-        //     printf("%d ", arr[i]);
-
-        // for (int i = 0; i <= r; i++)
-        //     printf("%d ", arr[i]);
-    }
+    cout << arr[i];
 }
 
 int main()
