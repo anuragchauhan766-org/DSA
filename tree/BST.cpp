@@ -198,7 +198,7 @@ int main()
     // root = Deletenode(root, 10);
     // cout << endl;
     // inorder(root);
-    cout << endl;
-    cout << isBST(root, INT_MIN, INT_MAX);
+    // cout << endl;
+    // cout << isBST(root, INT_MIN, INT_MAX);
     return 0;
 }
