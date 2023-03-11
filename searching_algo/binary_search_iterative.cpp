@@ -8,7 +8,8 @@ int binarysearch(int *arr, int size, int data)
     int mid;
     while (low <= high)
     {
-        mid = (low + high) / 2;
+        // mid = (low + high) / 2; // it is not better one as in the case of low or high have value INT_MAX it will result in overflow so
+        mid = low + ((high - low) / 2);
         if (arr[mid] == data)
         {
             return mid;

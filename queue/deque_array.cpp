@@ -114,7 +114,7 @@ void Dequeue::display()
         cout << "Queue is Empty !!";
         return;
     }
-    for (int i = f; i != r; i = (i + 1) % max)
+    for (int i = f; i != r; i = (i +  1)% max)
     {
         cout << arr[i] << " ";
     }
