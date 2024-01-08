@@ -97,10 +97,10 @@ int main()
     traversal(head);
 
     // head = frontinsert(head);
-    // insertafter(head, 2);
-    insertend(head);
+    insertafter(head, 2);
+    // insertend(head);
     printf("*******linked list after insertion*********\n");
     traversal(head);
-    
+
     return 0;
 }
